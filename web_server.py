@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 import aiml
 from bottle import get, run, default_app
+import os
+
+here = os.path.dirname(__file__)
 
 # Create a Kernel object. No string encoding (all I/O is unicode)
 kern = aiml.Kernel()
 kern.setTextEncoding( None )
-kern.bootstrap(brainFile="alice_brain")
+kern.bootstrap(brainFile=os.path.join(here, "alice_brain"))
 
 @get('/<query>')
 def index(query):
